@@ -89,17 +89,20 @@ const Header = (props) => {
               </a>
             }
             menus={[
-              { label: "My Profile", href: "", icon: null },
-              { label: "Flipkart Plus Zone", href: "", icon: null },
-              { label: "Orders", href: "", icon: null },
-              { label: "Wishlist", href: "", icon: null },
-              { label: "Rewards", href: "", icon: null },
-              { label: "Gift Cards", href: "", icon: null },
+              { label: "Your Account", href: "", icon: null },
+              { label: "Your Orders", href: "", icon: null },
+              { label: "Your Wishlist", href: "", icon: null },
+              { label: "Your Subscription", href: "", icon: null },
+              { label: "Your Prime Membership", href: "", icon: null },
+              { label: "Your Prime Video ", href: "", icon: null },
             ]}
             firstMenu={
               <div className="firstmenu">
                 <span>New Customer?</span>
-                <a style={{ color: "#2874f0" }}>Sign Up</a>
+
+                <a href="/register" style={{ color: "#2874f0" }}>
+                  Sign Up
+                </a>
               </div>
             }
           />

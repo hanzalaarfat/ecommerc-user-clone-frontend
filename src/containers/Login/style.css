@@ -1,0 +1,26 @@
+.Login {
+  background-color: #fff;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.logoL {
+  width: 200px;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.logoL .logoimageL {
+  width: 150px;
+}
+.sigin {
+  margin-top: 10px;
+}
