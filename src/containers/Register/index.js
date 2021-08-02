@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import amazonlogin from "../../images/amazon-login.png";
 import { signup } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
-
+import Loading from "../../components/Loading";
 import "./style.css";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,6 +62,7 @@ export default function Register() {
   return (
     <>
       <div className="Login">
+        {auth.loading && <Loading />}
         <div className="logoR">
           <a href="/">
             <img src={amazonlogin} className="logoimageR" alt="" />

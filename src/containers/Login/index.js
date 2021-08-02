@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import amazonlogin from "../../images/amazon-login.png";
 import { login } from "../../actions";
+import Loading from "../../components/Loading";
 
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+export default function Login({ history }) {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
@@ -44,11 +45,11 @@ export default function Login() {
 
   const auth = useSelector((state) => state.auth);
 
-  // useEffect(() => {
-  //     if (user) {
-  //         history.push('/')
-  //     }
-  // }, [history, user])
+  useEffect(() => {
+    if (auth.authenticate) {
+      history.push("/");
+    }
+  }, [history, auth.authenticate]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -59,6 +60,7 @@ export default function Login() {
   return (
     <>
       <div className="Login">
+        {auth.loading && <Loading />}
         <div className="logoL">
           <a href="/">
             <img src={amazonlogin} className="logoimageL" alt="" />

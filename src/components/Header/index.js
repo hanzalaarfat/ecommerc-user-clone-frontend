@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import flipkartLogo from "../../images/amazon.jpg";
+import { signout } from "../../actions";
 // import goldenStar from '../../images/logo/golden-star.png';
 import { IoIosArrowDown, IoIosCart, IoIosSearch } from "react-icons/io";
 import {
@@ -9,7 +10,8 @@ import {
   MaterialButton,
   DropdownMenu,
 } from "../MaterialUI";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 /**
  * @author
@@ -17,12 +19,13 @@ import { useSelector } from "react-redux";
  **/
 
 const Header = (props) => {
-  const [loginModal, setLoginModal] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState(false);
+  const dispatch = useDispatch();
 
   const auth = useSelector((state) => state.auth);
+  console.log(auth);
 
   useEffect(() => {
     if (auth.authenticate) {
@@ -30,10 +33,18 @@ const Header = (props) => {
     }
   }, [auth.authenticate]);
 
+  const logout = () => {
+    dispatch(signout());
+  };
+
   const renderLoggedInMenu = () => {
     return (
       <DropdownMenu
-        menu={<a className="fullName">{auth.user.fullName}</a>}
+        menu={
+          <a className="fullName" style={{ color: "white" }}>
+            {auth.user.fullName}
+          </a>
+        }
         menus={[
           { label: "My Profile", href: "", icon: null },
           { label: "SuperCoin Zone", href: "", icon: null },
@@ -65,7 +76,9 @@ const Header = (props) => {
               setLogin(true);
             }}
           >
-            Login
+            <Link to="/login" style={{ color: "white" }}>
+              Hello,Sign In
+            </Link>
           </a>
         }
         menus={[
@@ -88,12 +101,11 @@ const Header = (props) => {
             <span>New Customer?</span>
             <a
               onClick={() => {
-                setLoginModal(true);
-                setSignup(true);
+                setLogin(true);
               }}
               style={{ color: "#2874f0" }}
             >
-              Sign Up
+              <Link to="/register">Sign Up</Link>
             </a>
           </div>
         }
@@ -103,37 +115,6 @@ const Header = (props) => {
 
   return (
     <div className="header">
-      <Modal visible={loginModal} onClose={() => setLoginModal(false)}>
-        <div className="authContainer">
-          <div className="row">
-            <div className="leftspace">
-              <h2>Hello,sign in</h2>
-              <p>Get access to your Orders, Wishlist and Recommendations</p>
-            </div>
-            <div className="rightspace">
-              <MaterialInput
-                type="text"
-                label="Enter Email/Enter Mobile Number"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-
-              <MaterialInput
-                type="password"
-                label="Enter Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                rightElement={<a href="#">Forgot?</a>}
-              />
-              <MaterialButton
-                title="Login"
-                bgColor="#fb641b"
-                textColor="#ffffff"
-              />
-            </div>
-          </div>
-        </div>
-      </Modal>
       <div className="subHeader">
         <div className="logo">
           <a href="">
@@ -163,30 +144,7 @@ const Header = (props) => {
           </div>
         </div>
         <div className="rightMenu">
-          <DropdownMenu
-            menu={
-              <a className="loginButton" onClick={() => setLoginModal(true)}>
-                Hello,SignIn
-              </a>
-            }
-            menus={[
-              { label: "Your Account", href: "", icon: null },
-              { label: "Your Orders", href: "", icon: null },
-              { label: "Your Wishlist", href: "", icon: null },
-              { label: "Your Subscription", href: "", icon: null },
-              { label: "Your Prime Membership", href: "", icon: null },
-              { label: "Your Prime Video ", href: "", icon: null },
-            ]}
-            firstMenu={
-              <div className="firstmenu">
-                <span>New Customer?</span>
-
-                <a href="/register" style={{ color: "#2874f0" }}>
-                  Sign Up
-                </a>
-              </div>
-            }
-          />
+          {auth.authenticate ? renderLoggedInMenu() : renderNonLoggedInMenu()}
           <DropdownMenu
             menu={
               <a className="more">
@@ -203,12 +161,13 @@ const Header = (props) => {
             ]}
           />
           <div>
-            <a className="cart">
-              <IoIosCart />
+            <a href={`/cart`} className="cart">
+              {/* <Cart count={Object.keys(cart.cartItems).length} /> */}
               <span style={{ margin: "0 10px" }}>Cart</span>
             </a>
           </div>
         </div>
+        {/* right side menu ends here */}
       </div>
     </div>
   );
