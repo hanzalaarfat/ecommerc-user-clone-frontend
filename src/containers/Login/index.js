@@ -9,6 +9,7 @@ import Loading from "../../components/Loading";
 
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
+import { CircularProgress } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -38,7 +39,7 @@ export default function Login({ history }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [error, setError] = useState("");
-  // const [loading, setLoading] = useState("");
+  // const [loading, setLoading] = useState(false);
   // const history = useHistory();
 
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ export default function Login({ history }) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    // setLoading(true);
 
     dispatch(login({ email, password }));
   };
@@ -95,8 +97,10 @@ export default function Login({ history }) {
                 variant="contained"
                 color="primary"
                 onClick={submitHandler}
+                disabled={auth.loading}
               >
-                Continue
+                {auth.loading && <CircularProgress size={30} />}
+                {!auth.loading && "Continue"}
               </Button>
             </form>
           </Paper>

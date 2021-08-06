@@ -1,17 +1,20 @@
 .header {
   width: 100%;
   height: 56px;
-  background: #000d1a;
+  background: #131921;
 }
 
 .logo {
-  width: 137px;
-  height: 100%;
+  width: 77px;
+  height: 90%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+}
+.logo:hover {
+  border: 2px solid white;
 }
 .logo .logoimage {
   width: 75px;
@@ -64,6 +67,7 @@
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: gold;
 }
 .rightMenu {
   display: flex;
@@ -71,6 +75,7 @@
   justify-content: flex-end;
   align-items: center;
 }
+
 .loginButton {
   display: block;
   width: 100px;
@@ -82,6 +87,9 @@
   font-size: 16px;
   cursor: pointer;
 }
+.loginButton:hover {
+  border: 2px solid white;
+}
 .more {
   font-weight: bold;
   color: #fff;
@@ -90,6 +98,9 @@
   margin: 0 20px;
   cursor: pointer;
 }
+.more:hover {
+  border: 2px solid white;
+}
 .cart {
   font-weight: bold;
   color: #fff;
@@ -97,6 +108,9 @@
   align-items: center;
   justify-content: center;
   margin: 0 20px;
+}
+.cart:hover {
+  border: 2px solid white;
 }
 
 .authContainer {
@@ -134,4 +148,11 @@
   flex: 1;
   flex-direction: column;
   align-items: center;
+}
+
+.fullName {
+  color: white;
+}
+.fullName:hover {
+  border: 2px solid white;
 }

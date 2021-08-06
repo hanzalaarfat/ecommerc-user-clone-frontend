@@ -1,7 +1,7 @@
 .menuHeader {
   width: 100%;
   height: 40px;
-  background: #000033;
+  background: #232f3e;
   border-bottom: 1px solid #cecece;
   box-shadow: 0 2px 2px -2px #333;
   color: white;
@@ -24,7 +24,8 @@
   font-size: 14px;
 }
 .menuHeader > ul > li > span:hover {
-  color: #2874f0;
+  color: white;
+  border: 1px solid white;
 }
 .menuHeader > ul > li > ul {
   position: absolute;
